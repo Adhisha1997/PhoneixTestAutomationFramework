@@ -1,10 +1,16 @@
 package com.api.test;
-import static org.hamcrest.Matchers.*;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.notNullValue;
+
 import org.testng.annotations.Test;
+
 import com.pojo.LoginCredentials;
+import com.utility.ConfigureManager;
+
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
-import static io.restassured.RestAssured.*;
 
 public class LoginAPITest {
 	
@@ -14,7 +20,7 @@ public class LoginAPITest {
 		LoginCredentials loginCredentials = new LoginCredentials("iamfd", "password");
 		
 	given()
-		  .baseUri("http://64.227.160.186:9000/v1")
+		  .baseUri(ConfigureManager.getProperty("BASEURI"))
 		  .accept(ContentType.JSON)
 		  .contentType(ContentType.JSON)
 		  .body(loginCredentials)
