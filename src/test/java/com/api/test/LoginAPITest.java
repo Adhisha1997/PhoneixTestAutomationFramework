@@ -6,6 +6,8 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import org.testng.annotations.Test;
 
+import static com.pojo.LoginCredentials.*;
+
 import com.pojo.LoginCredentials;
 import com.utility.ConfigureManager;
 
@@ -17,13 +19,13 @@ public class LoginAPITest {
 	@Test
 	public void loginAPITest() {
 		
-		LoginCredentials loginCredentials = new LoginCredentials("iamfd", "password");
+		//LoginCredentials loginCredentials = new LoginCredentials("iamfd", "password");
 		
 	given()
 		  .baseUri(ConfigureManager.getProperty("BASEURI"))
 		  .accept(ContentType.JSON)
 		  .contentType(ContentType.JSON)
-		  .body(loginCredentials)
+		  .body(new LoginCredentials("iamfd", "password"))
 		  .log().uri()
 		  .log().headers()
 		  .log().method()
