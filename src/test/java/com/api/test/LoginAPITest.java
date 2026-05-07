@@ -22,7 +22,7 @@ public class LoginAPITest {
 		//LoginCredentials loginCredentials = new LoginCredentials("iamfd", "password");
 		
 	given()
-		  .baseUri(ConfigureManager.getProperty("BASEURI"))
+		  .baseUri(ConfigureManager.getProperty("QA"))
 		  .accept(ContentType.JSON)
 		  .contentType(ContentType.JSON)
 		  .body(new LoginCredentials("iamfd", "password"))

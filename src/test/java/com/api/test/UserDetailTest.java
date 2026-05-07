@@ -22,11 +22,11 @@ public class UserDetailTest {
 	public void userDetails() throws IOException {
 
 		
-		Header auth_header = new Header("Authorization",AuthToken("eng"));
+		Header auth_header = new Header("Authorization",AuthToken("fd"));
 		// ConfigureManager configMang = new ConfigureManager();//Make the method static
 		// so no need to create object with class name method can be called
 
-		given().baseUri(ConfigureManager.getProperty("BASEURI")).accept(ContentType.JSON).contentType(ContentType.JSON)
+		given().baseUri(ConfigureManager.getProperty("QA")).accept(ContentType.JSON).contentType(ContentType.JSON)
 				.header(auth_header).log().uri().log().method().log().headers().when().get("userdetails").then().log()
 				.all().statusCode(200).body("message", equalTo("Success"))
 				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/UserDetailSchema.json"))

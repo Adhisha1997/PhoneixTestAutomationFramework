@@ -8,15 +8,16 @@ import java.util.Properties;
 
 public class ConfigureManager {
 
-	public static String getProperty(String key) {
+	public static String getProperty(String env) {
 
 		Properties prop = new Properties();
 		
-		String path = null ;
+		String path;
+	    env = env.trim().toUpperCase();
 		
 		//File configFile_path = new File(System.getProperty("user.dir") +File.separator+ "src"+File.separator+"test"+File.separator+"resources"+File.separator+"Config"+File.separator+"config.properties");
 				
-	    String env= System.getProperty("env");
+	   // String env= System.getProperty("env");
 	    switch (env) {
 		case "QA" ->path="/src/test/resources/Config/config.qa.properties";
 		case "Dev"->path="/src/test/resources/Config/config.dev.properties";
@@ -37,7 +38,7 @@ public class ConfigureManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return prop.getProperty(key);
+		return prop.getProperty("BASEURI");
 	}
 
 	

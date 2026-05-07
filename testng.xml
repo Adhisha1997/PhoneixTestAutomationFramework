@@ -1,0 +1,14 @@
+
+
+<suite name="Phoneix API" verbose="1">
+  
+
+  <test name="Inwarrentary flow collection">
+    <classes>
+      <class name="com.api.test.LoginAPITest"/>
+      <class name="com.api.test.UserDetailTest"/>
+      <class name="com.api.test.CountAPITest"/>
+      <class name="com.api.test.MasterAPITest"/>
+    </classes>
+  </test>
+</suite>
