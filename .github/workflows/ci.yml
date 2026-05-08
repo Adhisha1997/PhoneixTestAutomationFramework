@@ -11,6 +11,23 @@ on:
   schedule:
     - cron: "00 21 * * *"
 
+  workflow_dispatch:
+    inputs: 
+     env:
+      description: "Environment"
+      type: choice
+      options: [qa,uat,dev]
+      default: qa
+      required: true
+
+     suiteXmlFile:
+      description: "Testng Xml File"
+      type: choice
+      options: [testng.xml,smoke.xml,regression.xml]
+      default: testng.xml
+      required: true
+  
+
 jobs:
   test:
 
@@ -25,7 +42,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Execute test automation framework
-      run: mvn clean test -DsuiteXmlFile=testng.xml
+      run: mvn clean test -DsuiteXmlFile="${github.event.inputs.suiteXmlFile}"
 
     - name: Upload a Build Artifact
       if: always()
