@@ -18,7 +18,7 @@ on:
       type: choice
       options: [qa,uat,dev]
       default: qa
-      required: true
+      required: false
 
      suiteXmlFile:
       description: "Testng Xml File"
