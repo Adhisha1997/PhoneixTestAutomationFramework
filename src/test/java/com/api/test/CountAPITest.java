@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import com.utility.AuthTokenProvider;
 import com.utility.ConfigureManager;
+import com.utility.SpecUtil;
 
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -17,20 +18,13 @@ public class CountAPITest {
 	public  void countAPI() {
 		
 		given()
-		       .baseUri(ConfigureManager.getProperty("QA"))
-		       .accept(ContentType.JSON)
-		       .contentType(ContentType.JSON)
+		       .spec(SpecUtil.requestSpec())
 		       .header("Authorization",AuthTokenProvider.AuthToken("fd"))
-		       .log().uri()
-		       .log().headers()
-		       .log().body()
-		       .log().method()
+		     
 		.when()
 		       .get("dashboard/count")
 		.then()
-		       .statusCode(200)
-		       .log().all()
-		       .time(lessThan(1000L))
+		       .spec(SpecUtil.requestSpecOk())
 		       .body("data.size()", equalTo(3))
 		       .body("data.count", everyItem(greaterThanOrEqualTo(0)))
 		       .body("data.label", everyItem(notNullValue()))
@@ -40,17 +34,11 @@ public class CountAPITest {
 	@Test
 	public void negative_MissingAuth() {
 		given()
-	       .baseUri(ConfigureManager.getProperty("QA"))
-	       .accept(ContentType.JSON)
-	       .contentType(ContentType.JSON)
-	       .log().headers()
-	       .log().body()
-	       .log().method()
+		.spec(SpecUtil.requestSpec())
 	.when()
 	       .get("dashboard/count")
 	.then()
-	       .statusCode(401)
-	       .log().all();
+	     .spec(SpecUtil.requestSpec_StatusCodeChange(401));
 	       
 	}
 }

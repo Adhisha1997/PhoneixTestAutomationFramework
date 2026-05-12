@@ -18,7 +18,8 @@ public class MasterAPITest {
 		
 		given()
 		       .baseUri(getProperty("QA"))
-		      // .accept(ContentType.JSON)
+		     
+		      .accept(ContentType.JSON)
 		       .contentType("")
 		       .header("Authorization", AuthTokenProvider.AuthToken("QC"))
 		       .log().uri()
