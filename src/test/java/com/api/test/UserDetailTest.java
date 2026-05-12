@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import static com.utility.AuthTokenProvider.*;
 import com.utility.ConfigureManager;
+import com.utility.SpecUtil;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -26,11 +27,11 @@ public class UserDetailTest {
 		// ConfigureManager configMang = new ConfigureManager();//Make the method static
 		// so no need to create object with class name method can be called
 
-		given().baseUri(ConfigureManager.getProperty("QA")).accept(ContentType.JSON).contentType(ContentType.JSON)
-				.header(auth_header).log().uri().log().method().log().headers().when().get("userdetails").then().log()
-				.all().statusCode(200).body("message", equalTo("Success"))
+		given().spec(SpecUtil.requestSpec())
+				.header(auth_header).when().get("userdetails").then().log()
+				.all().spec(SpecUtil.requestSpecOk()).body("message", equalTo("Success"))
 				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/UserDetailSchema.json"))
-				.time(lessThan(1500L));
+				;
 
 	}
 }
