@@ -27,6 +27,7 @@ public class UserDetailTest {
 		// ConfigureManager configMang = new ConfigureManager();//Make the method static
 		// so no need to create object with class name method can be called
 //
+		//
 		given().spec(SpecUtil.requestSpec())
 				.header(auth_header).when().get("userdetails").then().log()
 				.all().spec(SpecUtil.requestSpecOk()).body("message", equalTo("Success"))
