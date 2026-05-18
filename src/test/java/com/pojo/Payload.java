@@ -1,0 +1,20 @@
+package com.pojo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public record Payload (
+
+ int	mst_service_location_id,
+ int mst_platform_id,
+ int mst_warrenty_status_id,
+ int mst_oem_id,	
+ Customer customer,
+ CustomerAddress customer_address,
+ CustomerProduct customer_product,
+ List<Problems> problems 
+		 )
+{
+	
+}
