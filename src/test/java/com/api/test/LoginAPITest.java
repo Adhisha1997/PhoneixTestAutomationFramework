@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.notNullValue;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.pojo.LoginCredentials;
@@ -13,10 +14,17 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class LoginAPITest {
 	
-	@Test
+	LoginCredentials loginCredentials;
+	
+	@BeforeMethod(description = "Contains the payload for the API", groups = {"api","regression","smoke"})
+	public void setup() {
+		 loginCredentials = new LoginCredentials("iamfd", "password");
+	}
+	
+	@Test(description = "Login for FD user", groups = {"api","regression","smoke"})
 	public void loginAPITest() {
 		
-		LoginCredentials loginCredentials = new LoginCredentials("iamfd", "password");
+		
 		
 	given()
 		  .spec(SpecUtil.requestSpec())

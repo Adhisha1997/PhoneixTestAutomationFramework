@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.*;
 public class MasterAPITest {
 
 	
-	@Test
+	@Test(description = "Post request for Master", groups = {"api","regression","smoke"})
 	public void masterAPI() {
 		
 		given()

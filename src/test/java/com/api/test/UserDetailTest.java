@@ -18,7 +18,7 @@ import static io.restassured.RestAssured.*;
 
 public class UserDetailTest {
 
-	@Test
+	@Test(description = "Get request for Userdetails ", groups = {"api","regression","smoke"})
 
 	public void userDetails() throws IOException {
 

@@ -14,7 +14,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class CountAPITest {
 
-	@Test
+	@Test(description = "Get request for counting Jobs", groups = {"api","regression","smoke"})
 	public  void countAPI() {
 		
 		given()
@@ -31,7 +31,7 @@ public class CountAPITest {
 		       .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/CountSchema.json"));
 		
 	}
-	@Test
+	@Test(description = "Negative Get request for counting Jobs", groups = {"api","negative","regression","smoke"})
 	public void negative_MissingAuth() {
 		given()
 		.spec(SpecUtil.requestSpec())

@@ -5,6 +5,7 @@ import static io.restassured.RestAssured.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.pojo.Customer;
@@ -22,18 +23,27 @@ import io.restassured.http.Header;
 
 public class CreateJob {
 
-	@Test
-	public void CreateJobAPI() {
-		
+	Payload payload;
+	Header header ;
+	
+	@BeforeMethod(description = "Contains the paylod", groups = {"api","regression","smoke"})
+	public void setup() {
 		Customer customer = new Customer("QA", "Tester", "7777859698", "", "qatester@gmail.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("1 D", "Street", "Oxford Road", "New", "Oxford", "400095", "UK", "OxfordShire");
-		CustomerProduct customerProduct = new CustomerProduct(DateTimeUtil.timeAndDate(10), "267404202539889","267404202539889", "267404202539889",DateTimeUtil.timeAndDate(5),3,3);
+		CustomerProduct customerProduct = new CustomerProduct(DateTimeUtil.timeAndDate(10), "268404202539889","268404202539889", "268404202539889",DateTimeUtil.timeAndDate(5),3,3);
 		Problems problems = new Problems(2, "QA");
 		List<Problems> problemsArray= new ArrayList<Problems>();
 		problemsArray.add(problems);
-		Payload payload = new Payload(0, 2, 1, 2, customer, customerAddress, customerProduct, problemsArray);
+		 payload = new Payload(0, 2, 1, 2, customer, customerAddress, customerProduct, problemsArray);
 		
-		Header header = new Header("Authorization", AuthTokenProvider.AuthToken("fd"));
+		 header = new Header("Authorization", AuthTokenProvider.AuthToken("fd"));
+	}
+	
+	
+	@Test(description = "Post request for creating Jobs", groups = {"api","regression","smoke"})
+	public void CreateJobAPI() {
+		
+		
 		
 		given()
 		  .spec(SpecUtil.requestSpec())
