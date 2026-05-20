@@ -30,7 +30,7 @@ public class CreateJob {
 	public void setup() {
 		Customer customer = new Customer("QA", "Tester", "7777859698", "", "qatester@gmail.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("1 D", "Street", "Oxford Road", "New", "Oxford", "400095", "UK", "OxfordShire");
-		CustomerProduct customerProduct = new CustomerProduct(DateTimeUtil.timeAndDate(10), "268404202539889","268404202539889", "268404202539889",DateTimeUtil.timeAndDate(5),3,3);
+		CustomerProduct customerProduct = new CustomerProduct(DateTimeUtil.timeAndDate(10), "578404202539889","578404202539889", "578404202539889",DateTimeUtil.timeAndDate(5),3,3);
 		Problems problems = new Problems(2, "QA");
 		List<Problems> problemsArray= new ArrayList<Problems>();
 		problemsArray.add(problems);
