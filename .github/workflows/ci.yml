@@ -42,9 +42,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Execute test automation framework
-      run: mvn clean test -DsuiteXmlFile={{$github.event.inputs.suiteXmlFile}}
 
+    - name: Default Values for Exceution
+      id: default
+      run: | 
+            echo "suiteXmlFile=${{github.event.inputs.suiteXmlFile || 'testng.xml'}}" >> $GITHUB_OUTPUT  
+        
+    - name: Execute test automation framework
+      run: mvn clean test -DsuiteXmlFile="${{steps.default.outputs.suiteXmlFile}}"
     - name: Upload a Build Artifact
       if: always()
       uses: actions/upload-artifact@v7.0.1
@@ -52,5 +57,6 @@ jobs:
          name: SureFire Reports
          path : target/surefire-reports/
          retention-days: 10
+        
 
    
